@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{C4CE1EF9-26A5-4067-9F48-2045513EBDB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParcialUnoGallino", "ParcialUnoGallino\ParcialUnoGallino.csproj", "{3864FAB6-37BF-4A60-AFE7-62150FE60D7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParcialUno", "ParcialUnoGallino\ParcialUno.csproj", "{3864FAB6-37BF-4A60-AFE7-62150FE60D7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapper", "Mapper\Mapper.csproj", "{47387C5E-D223-4E97-8A16-6773DB6E7690}"
 EndProject

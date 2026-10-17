@@ -11,7 +11,7 @@ namespace DAL
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoGallinoConnection"].ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoConnection"].ConnectionString))
                 {
                     sqlConnection.Open();
                     string sql = "SELECT * FROM TIPO_BICICLETA WHERE ID_TIPO_BICICLETA = @idTipoBicicleta";
@@ -43,7 +43,7 @@ namespace DAL
             {
                 List<TipoBicicleta> tipoBicicletas = new List<TipoBicicleta>();
 
-                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoGallinoConnection"].ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoConnection"].ConnectionString))
                 {
                     sqlConnection.Open();
                     string sql = "SELECT * FROM TIPO_BICICLETA";

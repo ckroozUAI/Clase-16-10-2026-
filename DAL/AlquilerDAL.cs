@@ -12,7 +12,7 @@ namespace DAL
         {
             try
             {               
-                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoGallinoConnection"].ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoConnection"].ConnectionString))
                 {
                     sqlConnection.Open();
                     string sql = "INSERT INTO ALQUILER (TIPO_BICICLETA, DNI_CLIENTE, IMPORTE_TOTAL, FECHA_REGISTRO, FECHA_ALQUILER) " +
@@ -41,7 +41,7 @@ namespace DAL
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoGallinoConnection"].ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoConnection"].ConnectionString))
                 {
                     sqlConnection.Open();
                     string sql = "DELETE FROM ALQUILER WHERE NUMERO_ALQUILER = @idAlquiler";
@@ -62,7 +62,7 @@ namespace DAL
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoGallinoConnection"].ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoConnection"].ConnectionString))
                 {
                     sqlConnection.Open();
                     string sql = "UPDATE ALQUILER SET IMPORTE_TOTAL = @importeTotal, FECHA_ALQUILER = @fechaAlquiler WHERE NUMERO_ALQUILER = @idAlquiler";
@@ -87,7 +87,7 @@ namespace DAL
             try
             {
                 TipoBicicletaDAL tipoBicicletaDao = new TipoBicicletaDAL();
-                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoGallinoConnection"].ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoConnection"].ConnectionString))
                 {
                     sqlConnection.Open();
                     string sql = "SELECT * FROM ALQUILER WHERE NUMERO_ALQUILER = @idAlquiler";
@@ -100,7 +100,7 @@ namespace DAL
                         {
                             while (sqlDataReader.Read())
                             {
-                                var tipoBicicleta = tipoBicicletaDao.obtenerTipoBicicletaPorId(Convert.ToInt32(sqlDataReader["ID_TIPO_BICICLETA"]));
+                                var tipoBicicleta = tipoBicicletaDao.obtenerTipoBicicletaPorId(Convert.ToInt32(sqlDataReader["TIPO_BICICLETA"]));
                                 return AlquilerMapper.Map(sqlDataReader,tipoBicicleta);
                             }
                         }
@@ -121,7 +121,7 @@ namespace DAL
                 TipoBicicletaDAL tipoBicicletaDao = new TipoBicicletaDAL();
                 List<Alquiler> alquilers = new List<Alquiler>();
 
-                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoGallinoConnection"].ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ParcialUnoConnection"].ConnectionString))
                 {
                     sqlConnection.Open();
                     string sql = "SELECT * FROM ALQUILER";
