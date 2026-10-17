@@ -7,6 +7,7 @@ namespace ParcialUnoGallino
     {
         private AlquilerBusiness alquilerBusiness = new();
         private TipoBicicletaBusiness tipoBicicletaBusiness = new();
+        private List<Alquiler> alquileresPendientes = new List<Alquiler>();
         public Form1()
         {
             InitializeComponent();
@@ -14,6 +15,7 @@ namespace ParcialUnoGallino
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.lblPendiente.Text = "0";
             actualizarDgv();
             actualizarCBs();
         }
@@ -56,6 +58,9 @@ namespace ParcialUnoGallino
                 ValidarImporte(number);
 
                 Alquiler alquiler = new Alquiler();
+                TipoBicicleta tipoBicicleta = new TipoBicicleta();
+                alquiler.TipoBicicleta = tipoBicicleta;
+
                 alquiler.DniCliente = tbDniAgregar.Text;
                 alquiler.TipoBicicleta.IdTipoBicicleta = Convert.ToInt32(cbTipoAgregar.SelectedValue);
                 alquiler.FechaAlquiler = dtFechaAlquilerAgregar.Value;
@@ -151,5 +156,63 @@ namespace ParcialUnoGallino
 
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ValidarDNI(tbDniAgregar.Text);
+                ValidarFecha(dtFechaAlquilerAgregar.Value);
+                ValidarTipoBicicleta(Convert.ToInt32(cbTipoAgregar.SelectedValue));
+                if (!Double.TryParse(tbImporteAgregar.Text, out double number))
+                {
+                    throw new Exception("Formato de importe invalido");
+                }
+                ValidarImporte(number);
+
+                Alquiler alquiler = new Alquiler();
+                TipoBicicleta tipoBicicleta = new TipoBicicleta();
+                alquiler.TipoBicicleta = tipoBicicleta;
+
+                alquiler.DniCliente = tbDniAgregar.Text;
+                alquiler.TipoBicicleta.IdTipoBicicleta = Convert.ToInt32(cbTipoAgregar.SelectedValue);
+                alquiler.FechaAlquiler = dtFechaAlquilerAgregar.Value;
+                alquiler.ImporteTotal = Convert.ToDouble(tbImporteAgregar.Text);
+                alquiler.FechaRegistro = DateTime.Now;
+
+                this.alquileresPendientes.Add(alquiler);
+                this.lblPendiente.Text = this.alquileresPendientes.Count.ToString();
+                MessageBox.Show("Alquiler  agregado a borrador Correctamente.");
+                this.tbDniAgregar.Text = "";
+                this.tbImporteAgregar.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            } 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.alquileresPendientes.Count == 0) MessageBox.Show("No hay alquileres pendiente de guardado.");
+                else alquilerBusiness.agregarAlquileres(this.alquileresPendientes);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally {
+                actualizarDgv();
+                actualizarCBs();
+                this.alquileresPendientes.Clear();
+                this.tbDniAgregar.Text = "";
+                this.tbImporteAgregar.Text = "";
+                this.lblPendiente.Text = "0";
+            }
+        } 
+    
     }
 }

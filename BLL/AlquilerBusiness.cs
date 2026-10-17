@@ -1,5 +1,6 @@
 ﻿using DAL;
 using Entity;
+using System.Transactions;
 
 namespace BLL
 {
@@ -140,6 +141,28 @@ namespace BLL
             if (alqtemp == null)
             {
                 throw new Exception("No hay un alquiler con ese ID");
+            }
+        }
+
+        public void agregarAlquileres(List<Alquiler> listadoPendiente)
+        {
+
+            try
+            {
+
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    foreach (var alquiler in listadoPendiente)
+                    {
+                        agregarAlquiler(alquiler);
+                    }
+                    scope.Complete();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }
